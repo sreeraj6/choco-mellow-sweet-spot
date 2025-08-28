@@ -2,39 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Choco Mellow Dessert Café Design System
+   Warm, cozy colors inspired by melted chocolate and waffles
+   All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core chocolate and cream palette */
+    --background: 40 60% 96%;
+    --foreground: 25 40% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 40 80% 98%;
+    --card-foreground: 25 40% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 40 80% 98%;
+    --popover-foreground: 25 40% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Rich chocolate primary */
+    --primary: 30 25% 25%;
+    --primary-foreground: 40 60% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm cream secondary */
+    --secondary: 40 85% 85%;
+    --secondary-foreground: 25 40% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Soft muted tones */
+    --muted: 40 50% 90%;
+    --muted-foreground: 30 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Golden yellow accent */
+    --accent: 45 90% 65%;
+    --accent-foreground: 25 40% 15%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 40 60% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 40 30% 85%;
+    --input: 40 30% 85%;
+    --ring: 45 90% 65%;
+
+    /* Choco Mellow specific colors */
+    --chocolate: 25 40% 15%;
+    --chocolate-light: 30 25% 25%;
+    --cream: 40 60% 95%;
+    --warm-cream: 40 85% 85%;
+    --golden: 45 90% 65%;
+    --caramel: 35 70% 55%;
+
+    /* Gradients */
+    --gradient-chocolate: linear-gradient(135deg, hsl(25 40% 15%), hsl(30 25% 25%));
+    --gradient-cream: linear-gradient(135deg, hsl(40 60% 95%), hsl(40 85% 85%));
+    --gradient-warm: linear-gradient(135deg, hsl(40 85% 85%), hsl(45 90% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(40 60% 96%) 0%, hsl(40 85% 85%) 50%, hsl(45 90% 65%) 100%);
+
+    /* Shadows */
+    --shadow-warm: 0 4px 20px hsl(25 40% 15% / 0.1);
+    --shadow-chocolate: 0 8px 30px hsl(25 40% 15% / 0.15);
+    --shadow-glow: 0 0 30px hsl(45 90% 65% / 0.3);
+
+    --radius: 1rem;
 
     --radius: 0.5rem;
 
@@ -94,12 +121,79 @@ All colors MUST be HSL.
   }
 }
 
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3 {
+    @apply font-script;
+  }
+}
+
+@layer components {
+  /* Hero section styles */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .chocolate-gradient {
+    background: var(--gradient-chocolate);
+  }
+
+  .warm-gradient {
+    background: var(--gradient-warm);
+  }
+
+  /* Chocolate drip effect for footer */
+  .chocolate-drip::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: var(--gradient-chocolate);
+    clip-path: polygon(0 0, 5% 100%, 10% 0, 15% 100%, 20% 0, 25% 100%, 30% 0, 35% 100%, 40% 0, 45% 100%, 50% 0, 55% 100%, 60% 0, 65% 100%, 70% 0, 75% 100%, 80% 0, 85% 100%, 90% 0, 95% 100%, 100% 0);
+  }
+
+  /* Menu item hover effects */
+  .menu-item {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-xl;
+  }
+
+  .menu-item:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Button animations */
+  .btn-bounce:hover {
+    @apply animate-pulse;
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Smooth reveal animation */
+  .reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-700;
+  }
+
+  .reveal.in-view {
+    @apply opacity-100 translate-y-0;
   }
 }
